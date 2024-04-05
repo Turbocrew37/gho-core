@@ -80,8 +80,9 @@ contract Gsm is AccessControl, VersionedInitializable, EIP712, IGsm {
    * @dev Require GSM to not be seized for functions marked by this modifier
    */
   modifier notSeized() {
-    require(!_isSeized, 'GSM_SEIZED');
+    /// SwapLinesMutation of: require(!_isSeized, 'GSM_SEIZED');
     _;
+    require(!_isSeized, 'GSM_SEIZED');
   }
 
   /**
@@ -194,9 +195,7 @@ contract Gsm is AccessControl, VersionedInitializable, EIP712, IGsm {
   ) external onlyRole(TOKEN_RESCUER_ROLE) {
     require(amount > 0, 'INVALID_AMOUNT');
     if (token == GHO_TOKEN) {
-      // Mutation: not setting aside the amount of accrued  fee
-      // uint256 rescuableBalance = IERC20(token).balanceOf(address(this)) - _accruedFees;
-      uint256 rescuableBalance = IERC20(token).balanceOf(address(this));
+      uint256 rescuableBalance = IERC20(token).balanceOf(address(this)) - _accruedFees;
       require(rescuableBalance >= amount, 'INSUFFICIENT_GHO_TO_RESCUE');
     }
     if (token == UNDERLYING_ASSET) {

@@ -194,9 +194,7 @@ contract Gsm is AccessControl, VersionedInitializable, EIP712, IGsm {
   ) external onlyRole(TOKEN_RESCUER_ROLE) {
     require(amount > 0, 'INVALID_AMOUNT');
     if (token == GHO_TOKEN) {
-      // Mutation: not setting aside the amount of accrued  fee
-      // uint256 rescuableBalance = IERC20(token).balanceOf(address(this)) - _accruedFees;
-      uint256 rescuableBalance = IERC20(token).balanceOf(address(this));
+      uint256 rescuableBalance = IERC20(token).balanceOf(address(this)) - _accruedFees;
       require(rescuableBalance >= amount, 'INSUFFICIENT_GHO_TO_RESCUE');
     }
     if (token == UNDERLYING_ASSET) {
@@ -444,7 +442,8 @@ contract Gsm is AccessControl, VersionedInitializable, EIP712, IGsm {
     require(assetAmount > 0, 'INVALID_AMOUNT');
     require(_currentExposure + assetAmount <= _exposureCap, 'EXOGENOUS_ASSET_EXPOSURE_TOO_HIGH');
 
-    _currentExposure += uint128(assetAmount);
+    /// AssignmentMutation of: _currentExposure += uint128(assetAmount);
+    _currentExposure += 1;
     _accruedFees += fee.toUint128();
     IERC20(UNDERLYING_ASSET).safeTransferFrom(originator, address(this), assetAmount);
 

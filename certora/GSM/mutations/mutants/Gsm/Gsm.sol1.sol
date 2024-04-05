@@ -194,9 +194,7 @@ contract Gsm is AccessControl, VersionedInitializable, EIP712, IGsm {
   ) external onlyRole(TOKEN_RESCUER_ROLE) {
     require(amount > 0, 'INVALID_AMOUNT');
     if (token == GHO_TOKEN) {
-      // Mutation: not setting aside the amount of accrued  fee
-      // uint256 rescuableBalance = IERC20(token).balanceOf(address(this)) - _accruedFees;
-      uint256 rescuableBalance = IERC20(token).balanceOf(address(this));
+      uint256 rescuableBalance = IERC20(token).balanceOf(address(this)) - _accruedFees;
       require(rescuableBalance >= amount, 'INSUFFICIENT_GHO_TO_RESCUE');
     }
     if (token == UNDERLYING_ASSET) {
@@ -210,7 +208,8 @@ contract Gsm is AccessControl, VersionedInitializable, EIP712, IGsm {
   /// @inheritdoc IGsm
   function setSwapFreeze(bool enable) external onlyRole(SWAP_FREEZER_ROLE) {
     if (enable) {
-      require(!_isFrozen, 'GSM_ALREADY_FROZEN');
+      /// RequireMutation of: require(!_isFrozen, 'GSM_ALREADY_FROZEN');
+      require(!(!_isFrozen), 'GSM_ALREADY_FROZEN');
     } else {
       require(_isFrozen, 'GSM_ALREADY_UNFROZEN');
     }

@@ -145,10 +145,8 @@ contract Gsm is AccessControl, VersionedInitializable, EIP712, IGsm {
         abi.encode(originator, minAmount, receiver, nonces[originator]++, deadline)
       )
     );
-    require(
-      SignatureChecker.isValidSignatureNow(originator, digest, signature),
-      'SIGNATURE_INVALID'
-    );
+    /// FunctionCallMutation of: require(
+    SignatureChecker.isValidSignatureNow(originator, digest, signature);
 
     return _buyAsset(originator, minAmount, receiver);
   }
@@ -194,9 +192,7 @@ contract Gsm is AccessControl, VersionedInitializable, EIP712, IGsm {
   ) external onlyRole(TOKEN_RESCUER_ROLE) {
     require(amount > 0, 'INVALID_AMOUNT');
     if (token == GHO_TOKEN) {
-      // Mutation: not setting aside the amount of accrued  fee
-      // uint256 rescuableBalance = IERC20(token).balanceOf(address(this)) - _accruedFees;
-      uint256 rescuableBalance = IERC20(token).balanceOf(address(this));
+      uint256 rescuableBalance = IERC20(token).balanceOf(address(this)) - _accruedFees;
       require(rescuableBalance >= amount, 'INSUFFICIENT_GHO_TO_RESCUE');
     }
     if (token == UNDERLYING_ASSET) {
