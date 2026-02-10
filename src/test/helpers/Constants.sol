@@ -2,13 +2,15 @@
 pragma solidity ^0.8.0;
 
 contract Constants {
+  // ERC1967 slots
+  bytes32 internal constant ERC1967_IMPLEMENTATION_SLOT =
+    0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+  bytes32 internal constant ERC1967_ADMIN_SLOT =
+    0xb53127684a568b3173ae13b9f8a6016e243e63b6e8ee1178d6a717850b5d6103;
+
   // addresses expected for BGD stkAave
   address constant SHORT_EXECUTOR = 0xEE56e2B3D491590B5b31738cC34d5232F378a8D5;
   address constant STKAAVE_PROXY_ADMIN = 0xDeaDbeefdEAdbeefdEadbEEFdeadbeEFdEaDbeeF;
-
-  // admin roles for GhoToken
-  bytes32 public constant FACILITATOR_MANAGER_ROLE = keccak256('FACILITATOR_MANAGER_ROLE');
-  bytes32 public constant BUCKET_MANAGER_ROLE = keccak256('BUCKET_MANAGER_ROLE');
 
   // default admin role
   bytes32 public constant DEFAULT_ADMIN_ROLE = bytes32(0);
@@ -47,16 +49,10 @@ contract Constants {
   uint128 constant DEFAULT_GSM_USDC_AMOUNT = 100e6; // 6 decimals for USDC
   uint128 constant DEFAULT_GSM_GHO_AMOUNT = 100e18;
 
-  // GhoSteward
-  uint256 constant MINIMUM_DELAY = 5 days;
-  uint256 constant BORROW_RATE_CHANGE_MAX = 0.01e4;
-  uint40 constant STEWARD_LIFESPAN = 90 days;
-
-  // GhoStewardV2
-  uint256 constant GHO_BORROW_RATE_CHANGE_MAX = 0.0500e27;
+  // Gho Stewards
+  uint32 constant GHO_BORROW_RATE_CHANGE_MAX = 0.05e4;
   uint256 constant GSM_FEE_RATE_CHANGE_MAX = 0.0050e4;
-  uint256 constant GHO_BORROW_RATE_MAX = 0.2500e27;
-  uint256 constant MINIMUM_DELAY_V2 = 2 days;
+  uint256 constant MINIMUM_DELAY_V2 = 1 days;
   uint256 constant FIXED_RATE_STRATEGY_FACTORY_REVISION = 1;
 
   // sample users used across unit tests

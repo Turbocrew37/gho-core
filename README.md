@@ -1,3 +1,7 @@
+# ⚠️ This repository is DEPRECATED and no longer maintained ⚠️
+
+For the latest GHO code visit the GHO Origin Repository [here](https://github.com/aave-dao/gho-origin).
+
 [![Build pass](https://github.com/aave/gho/actions/workflows/node.js.yml/badge.svg)](https://github.com/aave/gho/actions/workflows/node.js.yml)
 
 ```
@@ -46,6 +50,8 @@ You can find all audit reports under the [audits](./audits/) folder
 - [2023-10-23 - Sigma Prime (GHO Stability Module)](./audits/2023-10-23_GSM_SigmaPrime.pdf)
 - [2023-12-07 - Certora Formal Verification (GHO Stability Module)](./certora/reports/Formal_Verification_Report_of_GHO_Stability_Module.pdf)
 - [2024-03-14 - Certora Formal Verification (GhoStewardV2)](./audits/2024-03-14_GhoStewardV2_Certora.pdf)
+- [2024-06-11 - Certora Formal Verification (UpgradeableGHO)](./audits/2024-06-11_UpgradeableGHO_Certora.pdf)
+- [2024-06-11 - Certora Formal Verification (Modular Gho Stewards)](./audits/2024-09-15_ModularGhoStewards_Certora.pdf)
 
 ## Getting Started
 
